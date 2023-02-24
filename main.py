@@ -1,3 +1,4 @@
+import os
 import tkinter as tk
 import json
 import datetime
@@ -55,10 +56,13 @@ class MoodCalendar:
 
     @staticmethod
     def load_mood():
-        with open('moods.json', 'r') as f:
+        if not os.path.exists("moods.json"):
+            with open("moods.json", "w"):
+                pass
+        with open("moods.json", "r") as file:
             try:
-                moods = json.load(f)
-            except ValueError as error:
+                moods = json.load(file)
+            except ValueError:
                 moods = {}
         return moods
 
