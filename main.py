@@ -33,6 +33,18 @@ class MoodCalendar:
         self.moods = self.load_mood()
         self.update_text()
 
+    def add_mood_happy(self):
+        self.moods[datetime.datetime.now().isoformat()[:10]] = "happy"
+        self.save_mood()
+
+    def add_mood_sad(self):
+        self.moods[datetime.datetime.now().isoformat()[:10]] = "sad"
+        self.save_mood()
+
+    def add_mood_neutral(self):
+        self.moods[datetime.datetime.now().isoformat()[:10]] = "neutral"
+        self.save_mood()
+
 
 if __name__ == "__main__":
     root = tk.Tk()
