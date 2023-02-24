@@ -60,6 +60,33 @@ class MoodCalendar:
             json.dump(MoodCalendar.moods, f)
         MoodCalendar.update_text()
 
+    def update_chart(self):
+        self.moods = self.load_mood()
+        happy_count = 0
+        sad_count = 0
+        neutral_count = 0
+        for mood in self.moods.values():
+            match mood:
+                case "happy":
+                    happy_count += 1
+                case "sad":
+                    sad_count += 1
+                case "neutral":
+                    neutral_count += 1
+        labels = ["sad", "neutral", "happy"]
+        colors = ["#EB0000", "#E9FF00", "#008E43"]
+        values = [sad_count, neutral_count, happy_count]
+        for val in values.copy():
+            if val == 0:
+                ind = values.index(val)
+                labels.pop(ind)
+                colors.pop(ind)
+                values.pop(ind)
+        plt.pie(values, labels=labels, colors=colors)
+        plt.title("Statistic")
+        plt.show()
+        self.update_text()
+
     @staticmethod
     def mainloop():
         tk.mainloop()
