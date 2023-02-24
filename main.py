@@ -46,6 +46,15 @@ class MoodCalendar:
         self.save_mood()
 
     @staticmethod
+    def load_mood():
+        with open('moods.json', 'r') as f:
+            try:
+                moods = json.load(f)
+            except ValueError as error:
+                moods = {}
+        return moods
+
+    @staticmethod
     def mainloop():
         tk.mainloop()
 
