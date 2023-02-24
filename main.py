@@ -54,24 +54,6 @@ class MoodCalendar:
             self.mood_arr.append(label)
             label.pack(side=tk.TOP)
 
-    @staticmethod
-    def load_mood():
-        if not os.path.exists("moods.json"):
-            with open("moods.json", "w"):
-                pass
-        with open("moods.json", "r") as file:
-            try:
-                moods = json.load(file)
-            except ValueError:
-                moods = {}
-        return moods
-
-    @staticmethod
-    def save_mood():
-        with open('moods.json', 'w') as f:
-            json.dump(MoodCalendar.moods, f)
-        MoodCalendar.update_text()
-
     def update_chart(self):
         self.moods = self.load_mood()
         happy_count = 0
@@ -98,6 +80,24 @@ class MoodCalendar:
         plt.title("Statistic")
         plt.show()
         self.update_text()
+
+    @staticmethod
+    def load_mood():
+        if not os.path.exists("moods.json"):
+            with open("moods.json", "w"):
+                pass
+        with open("moods.json", "r") as file:
+            try:
+                moods = json.load(file)
+            except ValueError:
+                moods = {}
+        return moods
+
+    @staticmethod
+    def save_mood():
+        with open('moods.json', 'w') as f:
+            json.dump(MoodCalendar.moods, f)
+        MoodCalendar.update_text()
 
     @staticmethod
     def mainloop():
