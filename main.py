@@ -45,6 +45,10 @@ class MoodCalendar:
         self.moods[datetime.datetime.now().isoformat()[:10]] = "neutral"
         self.save_mood()
 
+    @staticmethod
+    def mainloop():
+        tk.mainloop()
+
 
 if __name__ == "__main__":
     root = tk.Tk()
