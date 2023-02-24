@@ -55,6 +55,12 @@ class MoodCalendar:
         return moods
 
     @staticmethod
+    def save_mood():
+        with open('moods.json', 'w') as f:
+            json.dump(MoodCalendar.moods, f)
+        MoodCalendar.update_text()
+
+    @staticmethod
     def mainloop():
         tk.mainloop()
 
