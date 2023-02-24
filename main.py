@@ -45,6 +45,14 @@ class MoodCalendar:
         self.moods[datetime.datetime.now().isoformat()[:10]] = "neutral"
         self.save_mood()
 
+    def update_text(self):
+        for mood in self.mood_arr:
+            mood.destroy()
+        for key, val in list(self.load_mood().items())[-7:]:
+            label = tk.Label(self.master, text=f"{key}: {val}")
+            self.mood_arr.append(label)
+            label.pack(side=tk.TOP)
+
     @staticmethod
     def load_mood():
         with open('moods.json', 'r') as f:
