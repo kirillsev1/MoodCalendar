@@ -81,6 +81,11 @@ class MoodCalendar:
         plt.show()
         self.update_text()
 
+    def save_mood(self):
+        with open('moods.json', 'w') as f:
+            json.dump(self.moods, f)
+        self.update_text()
+
     @staticmethod
     def load_mood():
         if not os.path.exists("moods.json"):
@@ -92,12 +97,6 @@ class MoodCalendar:
             except ValueError:
                 moods = {}
         return moods
-
-    @staticmethod
-    def save_mood():
-        with open('moods.json', 'w') as f:
-            json.dump(MoodCalendar.moods, f)
-        MoodCalendar.update_text()
 
     @staticmethod
     def mainloop():
